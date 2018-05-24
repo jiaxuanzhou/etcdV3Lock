@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/etcdV3Lock/runtime"
+	"github.com/jiaxuanzhou/etcdV3Lock/runtime"
 )
 
 // For any test of the style:

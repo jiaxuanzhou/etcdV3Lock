@@ -9,7 +9,7 @@ import (
 
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/clientv3/concurrency"
-	"github.com/etcdV3Lock/util"
+	"github.com/jiaxuanzhou/etcdV3Lock/util"
 )
 
 var (
@@ -116,5 +116,5 @@ func doSomething(stopC <-chan struct{}) {
 
 	<-stopC
 	log.Printf("lock was released, stop the task")
-	stopTaskC <-  struct {}{}
+	stopTaskC <- struct{}{}
 }
