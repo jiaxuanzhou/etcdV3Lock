@@ -82,13 +82,11 @@ func GainLock(cli *clientv3.Client) error {
 			k, kerr := cli.Get(ctx, Mutex.Key())
 			if kerr != nil {
 				log.Printf("the error is %v", kerr)
-				Key = ""
 				StopCh <- struct{}{}
 				return
 			}
 			if len(k.Kvs) == 0 {
 				log.Printf("failed to get key of the lock ")
-				Key = ""
 				StopCh <- struct{}{}
 				return
 			}
@@ -98,14 +96,13 @@ func GainLock(cli *clientv3.Client) error {
 			log.Printf("the lock key is %s", string(key.Key))
 
 			if Key != "" && string(key.Key) != Key {
-				Key = ""
 				StopCh <- struct{}{}
 			}
 		}
 	}()
 	log.Printf("[NORMAL] gained the lock, start doing something!")
 	doSomething(StopCh)
-
+	Key = ""
 	return nil
 }
 
